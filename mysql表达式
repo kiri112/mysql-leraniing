@@ -1,0 +1,28 @@
+92.8 REGEXP 正则表达式
+正则表达式相当于 LIKE表达式前后加上%，在任何地方出现均可以被检索到
+SELECT *
+FROM sql_store.customers
+-- WHERE last_name REGEXP 'field$'  //$符号是指在最后出现的字符才能被检索到
+-- WHERE last_name REGEXP"^field|rose|mac" //^符号是指必须在开头才能被检测到 |是指或运算符
+-- WHERE last_name REGEXP '[gim]e' // []是指可以指定字符组合，如例， 就是ge ie me才能被检索到
+WHERE last_name REGEXP '[a-h]e' // a-h指是a到h的组合都可以被检测到
+
+2.9 IS NULL 表达式
+查询为空
+SELECT *
+FROM sql_store.customers
+WHERE Phone IS NULL
+查询phone里为空的顾客
+
+2.10 ORDER BY 表达式
+是指根据什么查询sql
+DESC是倒序的意思
+SELECT *
+FROM sql_store.customers
+ORDER BY state DESC,first_name  // 先根据state的倒序来查询，再查询first_name
+
+2.11 LIMIT 表达式
+LIMIT表示限制的意思
+SELECT *
+FROM sql_store.customers
+LIMIT 6,3 //第一个6表示offset（偏移量），指的是越过六个数据，第二个3表示读取三个数据 ,所以是读取7~9的数据
