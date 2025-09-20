@@ -1,0 +1,38 @@
+3.1 INNER JOIN 内连接
+同一数据库中两张表的连接
+SELECT *
+FROM sql_store.orders
+INNER JOIN sql_store.customers ON sql_store.orders.customer_id = sql_store.customers.customer_id   // JOIN表示customers与orders这两张表进行连接，ON是连接条件，这里的连接条件是根据customers_id相同进行连接
+
+3.2 JOIN 跨数据库连接
+记得加来自哪个数据库
+SELECT *
+FROM sql_store.order_items oi
+JOIN sql_inventory.products p
+     ON oi.product_id = p.product_id
+     
+3.3 JOIN 自连接
+自连接指的是一个表进行自我连接
+USE sql_hr;
+
+SELECT *
+FROM employees s
+JOIN employees m
+     ON s.reports_to = m.employee_id
+     
+3.4 JOIN 多连接
+利用多个join on进行连接
+USE sql_invoicing;
+
+SELECT p.payment_id,pe.payment_method_id,pe.name,c.name
+FROM payments p
+JOIN payment_methods pe
+
+3.5 JOIN 复合条件查询
+在有多个主键的时候需要使用复合条件查询，因为此时一个主键无法确定排列顺序
+USE sql_store;
+SELECT *
+FROM order_items oi
+JOIN order_item_notes oin
+     ON oi.order_id = oin.order_id//用and连接即可
+     AND oi.product_id = oin.product_id
