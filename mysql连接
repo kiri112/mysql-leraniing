@@ -1,5 +1,5 @@
 3.1 INNER JOIN 内连接
-同一数据库中两张表的连接
+同一数据库中两张表的连接，JOIN默认内连接
 SELECT *
 FROM sql_store.orders
 INNER JOIN sql_store.customers ON sql_store.orders.customer_id = sql_store.customers.customer_id   // JOIN表示customers与orders这两张表进行连接，ON是连接条件，这里的连接条件是根据customers_id相同进行连接
@@ -36,3 +36,46 @@ FROM order_items oi
 JOIN order_item_notes oin
      ON oi.order_id = oin.order_id//用and连接即可
      AND oi.product_id = oin.product_id
+
+3.6 OUTER JOIN 外连接
+外连接分为左连接 LEFT OUTER JOIN 和 右连接 RIGHT OUTER JOIN
+所谓外就是值无论符合不符合join on的条件都讲所有表的数据列出来
+USE sql_store;
+SELECT *
+FROM customers c //左连接的左
+LEFT JOIN orders o //右连接的右
+     ON c.customer_id = o.customer_id//这里如果用内连接只出现两个表里id相同的数据，而用外连接会出现c表里所有的数据
+ORDER BY c.customer_id
+
+3.7 USING 语句
+USING可以在 ON的两个前缀名字相同的情况下使用
+如：
+JOIN order_item_notes oin
+     ON oi.order_id = oin.order_id
+可以改为
+JOIN order_item_notes oin
+     USING(order_id)
+两者实际效果是一致的
+如果有多个主键就在括号里继续加
+     USING(order_id，xxx)
+
+3.8 NATURAL JOIN 自然连接
+自然连接是让编译器自动判断该如何连接表的数据，一般不建议使用
+USE sql_store;
+
+SELECT 
+      o.order_id,
+      c.first_name
+FROM orders o
+NATURAL JOIN customers c
+
+3.9 CROSS JOIN 交叉连接
+交叉连接是指令两个表中的数据进行所有可能的排列组合
+USE sql_store;
+
+SELECT 
+      o.order_id,
+      c.first_name
+FROM orders o
+CROSS JOIN customers c
+输出便是 id 和 name 所有类型的交叉组合
