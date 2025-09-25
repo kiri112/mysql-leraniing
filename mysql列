@@ -14,3 +14,29 @@ Datatype:即数据类型，如：VARCHAR是可变字符类型
 USE sql_store;
 INSERT INTO customers (first_name,last_name,birth_date,address,city,state)
 VALUES ('John','Smith',NULL,'aaa','city','CA')
+
+USE sql_store;
+INSERT INTO shippers (name)
+VALUES ("1"), //如果想要插入多个数据的话，只需要在VALUES下继续添加数值即可，每个数值之间用()隔开
+       ('2')
+
+4.3 插入分层行
+？
+USE sql_store;
+INSERT INTO orders(customer_id , order_date, status)
+values(1,"1992-01-01" , 1);
+
+INSERT INTO order_items
+VALUES (LAST_INSERT_ID(),1,1,3.95)//那个函数的意思是获取最新的主键ID
+
+4.4创建表复制
+把一个表的数据移到另一个表里，可以是部分，也可以是全部，在WHERE添加即可
+INSERT INTO order_archived
+SELECT *
+FROM orders
+WHERE order_date < "2019-01-01"
+
+4.5 CREATE TABLE ... AS 新建表
+//新建的表一定起码要有一列
+CREATE TABLE order_archived AS
+SELECT * FROM orders
