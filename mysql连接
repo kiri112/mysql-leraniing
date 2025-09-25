@@ -79,3 +79,22 @@ SELECT
 FROM orders o
 CROSS JOIN customers c
 输出便是 id 和 name 所有类型的交叉组合
+
+3.10 UNION 连接
+UNION连接是指使用了两个查询命令，要将两个查询结果合并为一张表的操作
+USE sql_store;
+
+SELECT 
+     order_id,
+     order_date,
+    'Active' AS status
+FROM orders
+WHERE order_date >='2019-01-01'
+UNION //在两个查询命令中间加UNION;
+SELECT 
+	order_id,
+    order_date,
+    'Archived' AS status
+FROM orders
+WHERE order_date < '2019-01-01'
+//最后表的名字跟的是第一个查询命令。
