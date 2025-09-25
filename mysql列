@@ -1,0 +1,16 @@
+4.1 列属性
+PK:是否为主键
+NN:是否能为空值
+UQ:是否为独一无二的值
+B:是否以二进制表示
+UN:是否是有符号的值
+ZF:是否自动填充0
+AI:是否自增
+G:是否生成列
+Datatype:即数据类型，如：VARCHAR是可变字符类型
+                        如果是VARCHAR(5)就代表最多接受5个字符，如果不足5个就不预留更多的内存
+4.2 INSERT INTO 插入数据 
+//插入数据的前提是列和列对齐
+USE sql_store;
+INSERT INTO customers (first_name,last_name,birth_date,address,city,state)
+VALUES ('John','Smith',NULL,'aaa','city','CA')
